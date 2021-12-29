@@ -1,0 +1,91 @@
+= Fabricator
+
+
+is a plugin enabled command line interface for the fabricator framework
+
+== Goal
+To allow a seamless migration from custom tools to a shared framework we will standardize the configuration DSL, but allow seperate plugins to provide the functionality. This will allow different users to have distinct implementations for code generation and other commands. 
+
+=== Extend fabricator with plugins
+This mechanic is highly inspired by the plugin mechanism of kubectl so most examples you find for that tool will be relevant for fabricator. 
+
+=== Installing fabricator plugins
+A plugin is a standalone executable file, whose name begins with `fabricator-`. To install a plugin, move its executable file to anywhere on your PATH.
+Alternatively you can also add a search location with the --plugin-path flag or by setting the FABRICATOR_PLUGIN_PATH environment variable. If the `--plugin-path` flag is not set the current directory is added to the search locations by default
+
+=== Discovering plugins
+`fabricator` provides a command `fabricator plugin list` that searches your path  for valid plugin executables. 
+Executing this command causes a traversal of all files in your PATH. Any files that are executable, and begin with `fabricator-` will show up in the order in which they are present in your PATH in this command's output. A warning will be included for any files beginning with `fabricator-`` that are not executable. A warning will also be included for any valid plugin files that overlap each other's name.
+
+==== Limitations
+It is  not possible to create plugins that overwrite existing `fabricator` commands. For example, creating a plugin `fabricator-version` will cause that plugin to never be executed, as the existing `fabricator version` command will always take precedence over it. Due to this limitation, it is also not possible to use plugins to add new subcommands to existing `fabricator` commands. 
+`fabricator plugin list` shows warnings for any valid plugins that attempt to do this.
+
+== Writing fabricator plugins
+
+You can write a plugin in any programming language or script that allows you to write command-line commands.
+
+There is no plugin installation or pre-loading required. Plugin executables receive the inherited environment from the `fabricator` binary. A plugin determines which command path it wishes to implement based on its name. For example, a plugin named `fabricator-foo` provides a command `fabricator foo`. You must install the plugin executable somewhere in your PATH.
+
+=== Example plugin
+
+[source, bash]
+----
+#!/bin/bash
+
+# optional argument handling
+if [[ "$1" == "version" ]]
+then
+    echo "1.0.0"
+    exit 0
+fi
+
+# optional argument handling
+if [[ "$1" == "path" ]]
+then
+    echo "$PATH"
+    exit 0
+fi
+
+echo "I am a plugin named fabricator-foo"
+----
+
+=== Using a plugin
+To use a plugin, make the plugin executable:
+
+[source, bash]
+----
+sudo chmod +x ./kubectl-foo
+----
+
+you may now invoke your plugin as a `fabricator` command
+[source, bash]
+----
+fabricator foo
+----
+
+----
+I am a plugin named fabricator foo
+----
+All args and flags are passed as-is to the executable
+[source, bash]
+----
+kubectl foo version
+----
+
+----
+1.0.0
+----
+
+== Naming a plugin
+
+As seen in the example above, a plugin determines the command path that it will implement based on its filename. Every sub-command in the command path that a plugin targets, is separated by a dash (-). For example, a plugin that wishes to be invoked whenever the command `fabricator foo bar baz` is invoked by the user, would have the filename of `fabricator-foo-bar-baz`.
+
+== Flags and argument handling
+fabricator plugins must parse and validate all of the arguments passed to them. 
+
+Here are some additional cases where users invoke your plugin while providing additional flags and arguments. This builds upon the `fabricator-foo-bar-baz` plugin from the scenario above.
+
+If you run `fabricator foo bar baz arg1 --flag=value arg2`, fabricator's plugin mechanism will first try to find the plugin with the longest possible name, which in this case would be `fabricator-foo-bar-baz-arg1`. Upon not finding that plugin, fabricator then treats the last dash-separated value as an argument (`arg1` in this case), and attempts to find the next longest possible name, `fabricator-foo-bar-baz`. Upon having found a plugin with this name, fabricator then invokes that plugin, passing all args and flags after the plugin's name as arguments to the plugin process.
+
+So in this case the `fabricator-foo-bar-baz` plugin would receive `arg1` as the first argument. 
