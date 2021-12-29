@@ -5,6 +5,7 @@ import (
 	"os/user"
 	"runtime"
 	"strings"
+	"time"
 
 	"code.cestus.io/tools/fabricator"
 	"github.com/Scardiecat/svermaker"
@@ -32,7 +33,7 @@ var buildInfo BuildInfo
 
 func init() {
 	if len(version) == 0 {
-		version = Generate()
+		version, name, buildDate = Generate()
 	}
 	if len(version) == 0 {
 		version = localBuild()
@@ -69,19 +70,21 @@ func GetVersion() BuildInfo {
 	return buildInfo
 }
 
-func Generate() string {
+func Generate() (version string, name string, date string) {
 	var serializer = fabricator.NewSerializer()
 	var pvs = semver.ProjectVersionService{Serializer: serializer}
 	var meta []string
 	v, err := pvs.Get()
 	if err != nil {
-		return ""
+		return
 	}
-	ver, err := MakeTags(*v, meta)
+	version, err = MakeTags(*v, meta)
 	if err != nil {
-		return ""
+		return
 	}
-	return ver
+	name = "fabricator"
+	date = time.Now().UTC().Format(time.RFC3339)
+	return
 }
 func MakeTags(p svermaker.ProjectVersion, buildMetadata []string) (string, error) {
 	m := semver.Manipulator{}
