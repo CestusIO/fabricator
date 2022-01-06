@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"code.cestus.io/tools/fabricator"
+	"code.cestus.io/tools/fabricator/pkg/fabricator"
 )
 
 type Executor struct {

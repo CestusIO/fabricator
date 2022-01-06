@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"sync"
 
-	"code.cestus.io/tools/fabricator"
+	"code.cestus.io/tools/fabricator/pkg/fabricator"
 )
 
 // WithCancelOnSignal returns a context that will get cancelled whenever one of

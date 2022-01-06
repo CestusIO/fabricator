@@ -6,10 +6,10 @@ import (
 	"os"
 	"strings"
 
-	"code.cestus.io/tools/fabricator"
 	"code.cestus.io/tools/fabricator/pkg/cmd/help"
 	"code.cestus.io/tools/fabricator/pkg/cmd/plugin"
 	"code.cestus.io/tools/fabricator/pkg/cmd/version"
+	"code.cestus.io/tools/fabricator/pkg/fabricator"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )

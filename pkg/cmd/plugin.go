@@ -9,7 +9,7 @@ import (
 	"runtime"
 	"strings"
 
-	"code.cestus.io/tools/fabricator"
+	"code.cestus.io/tools/fabricator/pkg/fabricator"
 	"code.cestus.io/tools/fabricator/pkg/helpers"
 )
 

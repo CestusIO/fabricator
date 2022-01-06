@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"code.cestus.io/tools/fabricator"
+	"code.cestus.io/tools/fabricator/pkg/fabricator"
 )
 
 // GuessGoImportPath guesses to Go import path for the specified folder.

@@ -3,8 +3,8 @@ package help
 import (
 	"errors"
 
-	"code.cestus.io/tools/fabricator"
 	"code.cestus.io/tools/fabricator/internal/pkg/util"
+	"code.cestus.io/tools/fabricator/pkg/fabricator"
 	"github.com/spf13/cobra"
 )
 

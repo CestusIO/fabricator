@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"code.cestus.io/tools/fabricator"
+	"code.cestus.io/tools/fabricator/pkg/fabricator"
 )
 
 func TestPluginPathsAreUnaltered(t *testing.T) {
