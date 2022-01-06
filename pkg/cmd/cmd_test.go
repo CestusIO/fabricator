@@ -6,8 +6,8 @@ import (
 	"os"
 	"testing"
 
-	"code.cestus.io/tools/fabricator"
 	"code.cestus.io/tools/fabricator/internal/pkg/util"
+	"code.cestus.io/tools/fabricator/pkg/fabricator"
 	"code.cestus.io/tools/fabricator/pkg/helpers"
 )
 

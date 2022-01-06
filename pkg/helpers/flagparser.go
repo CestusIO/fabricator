@@ -3,7 +3,7 @@ package helpers
 import (
 	"os"
 
-	"code.cestus.io/tools/fabricator"
+	"code.cestus.io/tools/fabricator/pkg/fabricator"
 	"code.cestus.io/tools/fabricator/pkg/ff"
 	"code.cestus.io/tools/fabricator/pkg/ff/ffpflag"
 	"github.com/spf13/cobra"
