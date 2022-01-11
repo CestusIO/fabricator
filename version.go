@@ -3,14 +3,14 @@ package fabricator
 import (
 	_ "embed"
 
-	"code.cestus.io/tools/fabricator/pkg/genericclioptions"
+	"code.cestus.io/libs/buildinfo"
 )
 
 //go:embed version.yml
 var version string
 
 func init() {
-	genericclioptions.SetupVersion(GetVersionYaml(), "fabricator")
+	buildinfo.GenerateVersionFromVersionYaml(GetVersionYaml(), "fabricator")
 }
 
 func GetVersionYaml() []byte {
