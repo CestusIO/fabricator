@@ -4,6 +4,7 @@ import (
 	"context"
 	"os"
 
+	_ "code.cestus.io/tools/fabricator"
 	"code.cestus.io/tools/fabricator/pkg/cmd"
 	"code.cestus.io/tools/fabricator/pkg/fabricator"
 	"code.cestus.io/tools/fabricator/pkg/helpers"

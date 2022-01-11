@@ -10,9 +10,9 @@ import (
 	"runtime"
 	"strings"
 
+	"code.cestus.io/libs/buildinfo"
 	"code.cestus.io/tools/fabricator/internal/pkg/util"
 	"code.cestus.io/tools/fabricator/pkg/fabricator"
-	"code.cestus.io/tools/fabricator/pkg/genericclioptions"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )
@@ -344,7 +344,7 @@ func pluginCommandHandler(ctx context.Context, pluginHandler PluginHandler, cmdA
 	for len(remainingArgs) > 0 {
 		tentativeName := strings.Join(remainingArgs, "-")
 		// try extended name with GOOS-ARCH first so developpers can work with their locally build plugins
-		path, found := pluginHandler.Lookup(ctx, strings.Join([]string{tentativeName, genericclioptions.GetVersion().OS, genericclioptions.GetVersion().Platform}, "-"), paths)
+		path, found := pluginHandler.Lookup(ctx, strings.Join([]string{tentativeName, buildinfo.ProvideBuildInfo().OS, buildinfo.ProvideBuildInfo().Platform}, "-"), paths)
 
 		if !found {
 			path, found = pluginHandler.Lookup(ctx, tentativeName, paths)

@@ -1,0 +1,9 @@
+apiVersion: fabricator.cestus.io/v1alpha1
+kind: Config
+components:
+  - name: "fabricator"
+    generator: fabricator-generate-project-go
+    spec:
+      goModule: code.cestus.io/tools/fabricator
+      repoURL: https://gitlab.com/cestus/tools/fabricator
+      isTool: true

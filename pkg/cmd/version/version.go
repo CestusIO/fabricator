@@ -3,9 +3,9 @@ package version
 import (
 	"fmt"
 
+	"code.cestus.io/libs/buildinfo"
 	"code.cestus.io/tools/fabricator/internal/pkg/util"
 	"code.cestus.io/tools/fabricator/pkg/fabricator"
-	"code.cestus.io/tools/fabricator/pkg/genericclioptions"
 	"github.com/spf13/cobra"
 )
 
@@ -22,7 +22,7 @@ func NewOptions(ioStreams fabricator.IOStreams) *options {
 
 // Run executes version command
 func (o *options) Run() error {
-	version := genericclioptions.GetVersion()
+	version := buildinfo.ProvideBuildInfo()
 	fmt.Fprintf(o.Out, "Name:       %s\n", version.Name)
 	fmt.Fprintf(o.Out, "Version:    %s\n", version.Version)
 	fmt.Fprintf(o.Out, "BuildDate:  %s\n", version.BuildDate)
