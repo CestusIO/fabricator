@@ -23,6 +23,7 @@ func NewExecutor(root string, io fabricator.IOStreams) *Executor {
 	return &Executor{
 		root: root,
 		io:   io,
+		env:  make(fabricator.Environment),
 	}
 }
 

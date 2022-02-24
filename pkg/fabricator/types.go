@@ -6,6 +6,7 @@ import (
 	"os"
 	"syscall"
 
+	"github.com/onsi/ginkgo/v2"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"gopkg.in/yaml.v3"
@@ -49,6 +50,16 @@ func NewTestIOStreamsDiscard() IOStreams {
 		In:     in,
 		Out:    io.Discard,
 		ErrOut: io.Discard,
+	}
+}
+
+// NewGinkoTestIOStreams returns a valid IOStreams for use with ginkgotests
+func NewGinkoTestIOStreams() IOStreams {
+	in := &bytes.Buffer{}
+	return IOStreams{
+		In:     in,
+		Out:    ginkgo.GinkgoWriter,
+		ErrOut: ginkgo.GinkgoWriter,
 	}
 }
 
