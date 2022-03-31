@@ -5,6 +5,14 @@ This CHANGELOG is a format conforming to [keep-a-changelog](https://github.com/o
 It is generated with git-chglog -o CHANGELOG.md
 
 
+<a name="v0.3.1"></a>
+## [v0.3.1](https://gitlab.com/cestus/tools/fabricator/compare/v0.3.0...v0.3.1)
+
+### Chore
+
+* dependency updates
+
+
 <a name="v0.3.0"></a>
 ## [v0.3.0](https://gitlab.com/cestus/tools/fabricator/compare/v0.2.1...v0.3.0)
 
