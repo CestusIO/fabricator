@@ -19,8 +19,7 @@ func GuessGoImportPath(ctx context.Context, io fabricator.IOStreams, root string
 		}
 	}()
 
-	executor := NewExecutor(root, io)
-
+	executor := NewExecutor(root, io).WithEnv("GOWORK", "off")
 	// If a Go import path is defined, use it.
 	if goImportPath, err = executor.Output(ctx, "go", "list", "-f", "{{ .ImportPath }}"); err == nil {
 		return strings.TrimSpace(goImportPath), nil
@@ -67,7 +66,7 @@ func GetGoModule(ctx context.Context, io fabricator.IOStreams, root string) (_ *
 		}
 	}()
 
-	executor := NewExecutor(root, io)
+	executor := NewExecutor(root, io).WithEnv("GOWORK", "off")
 
 	var result GoModule
 	err = executor.JSONOutput(ctx, &result, "go", "list", "-m", "-json")
@@ -88,8 +87,7 @@ func GetGoPackage(ctx context.Context, io fabricator.IOStreams, pkg string) (_ *
 		return nil, fmt.Errorf("could not determine working directory")
 	}
 
-	executor := NewExecutor(wd, io)
-
+	executor := NewExecutor(wd, io).WithEnv("GOWORK", "off")
 	var result GoModule
 	err = executor.JSONOutput(ctx, &result, "go", "list", "-json", pkg)
 
