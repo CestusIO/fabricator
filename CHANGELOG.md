@@ -5,6 +5,22 @@ This CHANGELOG is a format conforming to [keep-a-changelog](https://github.com/o
 It is generated with git-chglog -o CHANGELOG.md
 
 
+<a name="v0.4.2"></a>
+## [v0.4.2](https://github.com/CestusIO/fabricator/compare/v0.4.1...v0.4.2)
+
+### Chores
+
+* dependency updates
+
+
+<a name="v0.4.1"></a>
+## [v0.4.1](https://github.com/CestusIO/fabricator/compare/v0.4.0...v0.4.1)
+
+### Chores
+
+* switch off workspace mode for helpers
+
+
 <a name="v0.4.0"></a>
 ## [v0.4.0](https://github.com/CestusIO/fabricator/compare/v0.3.1...v0.4.0)
 
